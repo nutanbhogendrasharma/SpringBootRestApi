@@ -1,0 +1,29 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xv.SpringBootRestApi.mappers.StudentMapper">
+    <select id="getStudents" resultType="com.xv.SpringBootRestApi.Student">
+        SELECT id, name, description  FROM student
+    </select>
+    <select id="getStudent" resultType="com.xv.SpringBootRestApi.Student" parameterType="int">
+        SELECT id, name, description  FROM student WHERE id = #{id}
+    </select>
+    
+    <update id="save" parameterType="com.xv.SpringBootRestApi.Student">
+        UPDATE student SET
+            name = #{name},
+            description = #{description}
+        WHERE id = #{id}
+    </update>
+
+    <insert id="insert" parameterType="com.xv.SpringBootRestApi.Student"
+        useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO student(name, description)
+        VALUES (#{name}, #{description})
+    </insert>
+ 
+    <delete id="delete" parameterType="int">
+        DELETE FROM student WHERE id = #{id}
+    </delete>
+
+ 
+</mapper>
